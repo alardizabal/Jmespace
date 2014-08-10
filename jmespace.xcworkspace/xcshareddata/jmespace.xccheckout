@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FF38ACB3-589D-48C3-99B1-5F139EA1A584</string>
+	<key>IDESourceControlProjectName</key>
+	<string>jmespace</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C7368D4D-8613-4570-BA3B-0F97633DD413</key>
+		<string>ssh://github.com/alardizabal/Jmespace.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>jmespace.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C7368D4D-8613-4570-BA3B-0F97633DD413</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/alardizabal/Jmespace.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C7368D4D-8613-4570-BA3B-0F97633DD413</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C7368D4D-8613-4570-BA3B-0F97633DD413</string>
+			<key>IDESourceControlWCCName</key>
+			<string>jmespace</string>
+		</dict>
+	</array>
+</dict>
+</plist>

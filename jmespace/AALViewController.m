@@ -9,15 +9,14 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "AALViewController.h"
+#import "AALSpaceProfileViewController.h"
 #import "AALSpaceCustomCellTableViewCell.h"
 #import "AALSpaceObject.h"
 #import "AALConstants.h"
 #import "MBProgressHUD.h"
 
 
-@interface AALViewController () {
-    GMSMapView *_mapView;
-}
+@interface AALViewController ()
 
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLLocation *location;
@@ -31,6 +30,7 @@
 @property (nonatomic) NSMutableArray *places;
 
 @property (nonatomic) GMSCameraPosition *camera;
+@property (nonatomic) GMSMapView *mapView;
 
 @end
 
@@ -53,16 +53,7 @@
     
     self.location = [[CLLocation alloc] init];
     
-    // Setup - Map
-    
-    self.camera = [GMSCameraPosition cameraWithLatitude:40.705091
-                                              longitude:-74.013506
-                                                   zoom:15];
-    _mapView = [GMSMapView mapWithFrame:CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height/2) camera:self.camera];
-    
-    _mapView.myLocationEnabled = YES; // Notification to allow location services should pop up
-    
-    [self.view addSubview:_mapView];
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 64, 320, 44)];
     
     // Setup - Table View
     
@@ -72,6 +63,26 @@
     self.spaceTableView.delegate = self;
     self.spaceTableView.dataSource = self;
     [self.spaceTableView setSeparatorInset:UIEdgeInsetsZero];   // Removes leading space at beginning of row in a table view
+    
+    // Setup - Map
+    
+    self.camera = [GMSCameraPosition cameraWithLatitude:40.705091
+                                              longitude:-74.013506
+                                                   zoom:15];
+    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 108, self.view.bounds.size.width, self.view.bounds.size.height - self.spaceTableView.bounds.size.height - 108) camera:self.camera];
+    
+    // 108 is the height of the status, nav, and search bars.  284 is the height of the table view
+    
+    self.mapView.myLocationEnabled = YES; // Notification to allow location services should pop up
+    
+    [self.view addSubview:self.mapView];
+    
+    self.navigationController.navigationBar.tintColor = [UIColor darkGrayColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = YES;
+    
+    [self.view addSubview:searchBar];
     
 }
 
@@ -121,6 +132,9 @@
     
     static NSString *cellIdentifier = @"spaceCell";
     
+    AALSpaceObject *tempObject = [[AALSpaceObject alloc]init];
+    tempObject = self.places[indexPath.row];
+    
     AALSpaceCustomCellTableViewCell *cell = (AALSpaceCustomCellTableViewCell *)[self.spaceTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (cell == nil) {
@@ -129,71 +143,40 @@
     
     // Configure the cell...
     
-    NSString *placeName = self.places[indexPath.row][@"name"];
-    NSString *placeAddress = self.places[indexPath.row][@"vicinity"];
+    NSString *placeName = tempObject.name;
+    NSString *placeAddress = tempObject.address;
     
     cell.name.text = placeName;
     cell.address.text = placeAddress;
     
-    NSUInteger r = arc4random_uniform(11);
-    
-    switch (r) {
-            
-        case 10:
-            cell.backgroundColor = kGuppieGreenColor;
-            break;
-            
-        case 9:
-            cell.backgroundColor = kFawnColor;
-            break;
-            
-        case 8:
-            cell.backgroundColor = kLinenColor;
-            break;
-            
-        case 7:
-            cell.backgroundColor = kTurquoiseColor;
-            break;
-            
-        case 6:
-            cell.backgroundColor = kBubbleGumColor;
-            break;
-            
-        case 5:
-            cell.backgroundColor = kAmberColor;
-            break;
-            
-        case 4:
-            cell.backgroundColor = kLavenderColor;
-            break;
-            
-        case 3:
-            cell.backgroundColor = kRedColor;
-            break;
-            
-        case 2:
-            cell.backgroundColor = kMintColor;
-            break;
-            
-        case 1:
-            cell.backgroundColor = kYellowColor;
-            break;
-            
-        case 0:
-            cell.backgroundColor = kBlueColor;
-            break;
-            
-        default:
-            break;
+    if ([tempObject.openNow integerValue] == 1) {
+        cell.open.backgroundColor = kMintColor;
+    } else {
+        cell.open.backgroundColor = kBubbleGumColor;
     }
     
     return cell;
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    AALSpaceProfileViewController *profileVC = [self.storyboard instantiateViewControllerWithIdentifier:@"spaceProfileView"];
+    profileVC.spaceToDisplay = self.places[indexPath.row];
+    
+    [self.navigationController pushViewController:profileVC animated:YES];
+    
+}
+
+// Change height of table view row
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 50.0;
+//}
+
 -(void)queryGooglePlaces {
     
-    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=1000&types=&name=bank&key=%@", self.location2D.latitude, self.location2D.longitude, kGOOGLE_API_KEY];
+    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=50000&types=&name=wework&key=%@", self.location2D.latitude, self.location2D.longitude, kGOOGLE_API_KEY];
     
     //Formulate the string as a URL object.
     NSURL *googleRequestURL=[NSURL URLWithString:url];
@@ -230,26 +213,26 @@
     NSLog(@"%@", json);
     
     if ([json objectForKey:@"results"]) {
-        //The results from Google will be an array obtained from the NSDictionary object with the key "results".
-        self.places = [json objectForKey:@"results"];
+        //The results from Google will be in an array obtained from the NSDictionary object with the key "results".
         
-        //Write out the data to the console.
+        NSArray *tempArray = [json objectForKey:@"results"];
         
-        NSMutableArray *tempArray = [[NSMutableArray alloc]init];
-        
-        for (NSUInteger i = 0; i < [self.places count]; i++) {
-            AALSpaceObject *tempSpaceObject = [[AALSpaceObject alloc]init];
-            tempSpaceObject.name = self.places[i][@"name"];
-            tempSpaceObject.address = self.places[i][@"vicinity"];
-            tempSpaceObject.placeID = self.places[i][@"place_id"];
-            tempSpaceObject.latitude = [self.places[i][@"geometry"][@"location"][@"lat"] floatValue];
-            tempSpaceObject.longitude = [self.places[i][@"geometry"][@"location"][@"lon"] floatValue];
+        for (NSUInteger i = 0; i < [tempArray count]; i++) {
             
-            [tempArray addObject:tempSpaceObject];
+            AALSpaceObject *tempSpaceObject = [[AALSpaceObject alloc]init];
+            tempSpaceObject.name = tempArray[i][@"name"];
+            tempSpaceObject.address = tempArray[i][@"vicinity"];
+            tempSpaceObject.placeID = tempArray[i][@"place_id"];
+            tempSpaceObject.openNow = tempArray[i][@"opening_hours"][@"open_now"];
+            tempSpaceObject.latitude = tempArray[i][@"geometry"][@"location"][@"lat"];
+            tempSpaceObject.longitude = tempArray[i][@"geometry"][@"location"][@"lng"];
+            tempSpaceObject.photoReference = tempArray[i][@"photos"][0][@"photo_reference"];
+            
+            [self.places addObject:tempSpaceObject];
+            
         }
         
-        NSLog(@"%@", tempArray[0]);
-        //NSLog(@"%@", self.places[0][@"vicinity"]);
+        //NSLog(@"%@", tempArray[0][@"photos"]);
     }
 }
 

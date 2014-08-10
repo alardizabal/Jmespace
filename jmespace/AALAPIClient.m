@@ -13,37 +13,26 @@
 
 @implementation AALAPIClient
 
-//+ (void) getSpacesNearbyWithLatitude:(CGFloat)latitude
-//                           longitude:(CGFloat)longitude
-//                              radius:(NSUInteger)radius
-//                             keyword:(NSString *)keyword
-//                          completion:(void (^)(NSDictionary *dictionary))completionBlock {
-//    
-//    NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
-//    
-//    [backgroundQueue addOperationWithBlock:^{
-//        
-//        CGFloat location =
-//        
-//        NSString *getGooglePlacesURL = [NSString stringWithFormat:@"%@", kGPLACES_API_URL];
-//        
-//        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//        
-//        NSDictionary *params = @{@"key":kGOOGLE_API_KEY, @"location":latitude
-//        
-//        [manager GET:getGooglePlacesURL
-//          parameters:nil
-//             success:^(NSURLSessionDataTask *task, id responseObject)
-//         {
-//             [backgroundQueue addOperationWithBlock:^{
-//                 completionBlock(responseObject);
-//             }];
-//             
-//         } failure:^(NSURLSessionDataTask *task, NSError *error)
-//         {
-//             NSLog(@"Fail: %@",error.localizedDescription);
-//         }];
-//    }];
-//}
++ (void) getUserInterestsWithReference:(NSString *)photoreferenceWithCompletion:(void (^)(NSDictionary *dictionary))completionBlock {
+    
+    NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
+    NSString *getSpaceImageURL = [NSString stringWithFormat:@"%@", kGPLACES_PHOTOS_API_URL];
+   // NSDictionary *params = @{@"key":kGOOGLE_API_KEY, @"photoreference":email, @"maxheight": 1600};
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:getSpaceImageURL
+      parameters:nil
+         success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         [backgroundQueue addOperationWithBlock:^{
+             completionBlock(responseObject);
+         }];
+         
+         
+     } failure:^(NSURLSessionDataTask *task, NSError *error)
+     {
+         NSLog(@"Fail: %@",error.localizedDescription);
+     }];
+}
 
 @end

@@ -13,13 +13,15 @@
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *placeID;
-@property (nonatomic) CGFloat latitude;
-@property (nonatomic) CGFloat longitude;
+@property (nonatomic) NSString *websiteURL;
+@property (nonatomic) id latitude;
+@property (nonatomic) id longitude;
 @property (nonatomic) NSString *review;
 @property (nonatomic) NSUInteger rating;
 @property (nonatomic) NSMutableArray *comments;
+@property (nonatomic) NSString *photoReference;
 @property (nonatomic) NSMutableArray *photos;
 @property (nonatomic) NSMutableArray *videos;
-@property (nonatomic) BOOL isOpen;
+@property (nonatomic) id openNow;
 
 @end

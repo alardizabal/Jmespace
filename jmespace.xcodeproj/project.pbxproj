@@ -48,7 +48,11 @@
 		A261C4F119929C79003A0009 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A261C4F019929C79003A0009 /* FacebookSDK.framework */; };
 		A261C4F41992D039003A0009 /* AALSpaceCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A261C4F31992D039003A0009 /* AALSpaceCustomCellTableViewCell.m */; };
 		A261C4F71992D3FF003A0009 /* AALSpaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A261C4F61992D3FF003A0009 /* AALSpaceObject.m */; };
+		A2B0EBD019950AE600A8AD52 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B0EBCF19950AE600A8AD52 /* SWRevealViewController.m */; };
+		A2B0EBD219950B2000A8AD52 /* Colors in Resources */ = {isa = PBXBuildFile; fileRef = A2B0EBD119950B2000A8AD52 /* Colors */; };
+		A2B0EBD51995172B00A8AD52 /* AALSpaceProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B0EBD41995172B00A8AD52 /* AALSpaceProfileViewController.m */; };
 		A2B6F9241993C14700FE8C77 /* AALAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B6F9231993C14700FE8C77 /* AALAPIClient.m */; };
+		A2F3198B19972EE200B64D8D /* AALSpaceWebsiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F3198A19972EE200B64D8D /* AALSpaceWebsiteViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,8 +115,15 @@
 		A261C4F31992D039003A0009 /* AALSpaceCustomCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALSpaceCustomCellTableViewCell.m; sourceTree = "<group>"; };
 		A261C4F51992D3FF003A0009 /* AALSpaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AALSpaceObject.h; sourceTree = "<group>"; };
 		A261C4F61992D3FF003A0009 /* AALSpaceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALSpaceObject.m; sourceTree = "<group>"; };
+		A2B0EBCE19950AE600A8AD52 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		A2B0EBCF19950AE600A8AD52 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		A2B0EBD119950B2000A8AD52 /* Colors */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Colors; sourceTree = "<group>"; };
+		A2B0EBD31995172B00A8AD52 /* AALSpaceProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AALSpaceProfileViewController.h; sourceTree = "<group>"; };
+		A2B0EBD41995172B00A8AD52 /* AALSpaceProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALSpaceProfileViewController.m; sourceTree = "<group>"; };
 		A2B6F9221993C14700FE8C77 /* AALAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AALAPIClient.h; sourceTree = "<group>"; };
 		A2B6F9231993C14700FE8C77 /* AALAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALAPIClient.m; sourceTree = "<group>"; };
+		A2F3198919972EE200B64D8D /* AALSpaceWebsiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AALSpaceWebsiteViewController.h; sourceTree = SOURCE_ROOT; };
+		A2F3198A19972EE200B64D8D /* AALSpaceWebsiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALSpaceWebsiteViewController.m; sourceTree = SOURCE_ROOT; };
 		FD3F556BF45142F4A4228814 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -223,17 +234,24 @@
 			children = (
 				A261C4991992687D003A0009 /* AALAppDelegate.h */,
 				A261C49A1992687D003A0009 /* AALAppDelegate.m */,
+				A261C4BF19926BA5003A0009 /* AALConstants.h */,
+				A261C4C019926BA5003A0009 /* AALConstants.m */,
 				A2B6F9221993C14700FE8C77 /* AALAPIClient.h */,
 				A2B6F9231993C14700FE8C77 /* AALAPIClient.m */,
+				A261C4F51992D3FF003A0009 /* AALSpaceObject.h */,
+				A261C4F61992D3FF003A0009 /* AALSpaceObject.m */,
 				A261C49C1992687D003A0009 /* Main.storyboard */,
 				A261C49F1992687D003A0009 /* AALViewController.h */,
 				A261C4A01992687D003A0009 /* AALViewController.m */,
-				A261C4F51992D3FF003A0009 /* AALSpaceObject.h */,
-				A261C4F61992D3FF003A0009 /* AALSpaceObject.m */,
+				A2B0EBD31995172B00A8AD52 /* AALSpaceProfileViewController.h */,
+				A2B0EBD41995172B00A8AD52 /* AALSpaceProfileViewController.m */,
+				A2F3198919972EE200B64D8D /* AALSpaceWebsiteViewController.h */,
+				A2F3198A19972EE200B64D8D /* AALSpaceWebsiteViewController.m */,
 				A261C4F21992D039003A0009 /* AALSpaceCustomCellTableViewCell.h */,
 				A261C4F31992D039003A0009 /* AALSpaceCustomCellTableViewCell.m */,
-				A261C4BF19926BA5003A0009 /* AALConstants.h */,
-				A261C4C019926BA5003A0009 /* AALConstants.m */,
+				A2B0EBCE19950AE600A8AD52 /* SWRevealViewController.h */,
+				A2B0EBCF19950AE600A8AD52 /* SWRevealViewController.m */,
+				A2B0EBD119950B2000A8AD52 /* Colors */,
 				A261C4A21992687D003A0009 /* Images.xcassets */,
 				A261C4911992687D003A0009 /* Supporting Files */,
 			);
@@ -348,6 +366,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2B0EBD219950B2000A8AD52 /* Colors in Resources */,
 				A261C4A31992687D003A0009 /* Images.xcassets in Resources */,
 				A261C4951992687D003A0009 /* InfoPlist.strings in Resources */,
 				A261C49E1992687D003A0009 /* Main.storyboard in Resources */,
@@ -405,7 +424,10 @@
 			files = (
 				A261C4C119926BA5003A0009 /* AALConstants.m in Sources */,
 				A261C4F41992D039003A0009 /* AALSpaceCustomCellTableViewCell.m in Sources */,
+				A2F3198B19972EE200B64D8D /* AALSpaceWebsiteViewController.m in Sources */,
 				A261C4971992687D003A0009 /* main.m in Sources */,
+				A2B0EBD51995172B00A8AD52 /* AALSpaceProfileViewController.m in Sources */,
+				A2B0EBD019950AE600A8AD52 /* SWRevealViewController.m in Sources */,
 				A2B6F9241993C14700FE8C77 /* AALAPIClient.m in Sources */,
 				A261C49B1992687D003A0009 /* AALAppDelegate.m in Sources */,
 				A261C4F71992D3FF003A0009 /* AALSpaceObject.m in Sources */,

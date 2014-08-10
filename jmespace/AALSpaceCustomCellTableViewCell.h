@@ -12,6 +12,6 @@
 
 @property (nonatomic) UILabel *name;
 @property (nonatomic) UILabel *address;
-@property (nonatomic) UIImageView *thumbnail;
+@property (nonatomic) UIView *open;
 
 @end

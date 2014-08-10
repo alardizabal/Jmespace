@@ -17,5 +17,6 @@ NSString *const kFB_APP_ID = @"1587985351428891";
 NSString *const kFB_APP_SECRET = @"c0e42bae11ae1eeecf2c0eac97b34a23";
 
 NSString *const kGPLACES_API_URL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+NSString *const kGPLACES_PHOTOS_API_URL = @"https://maps.googleapis.com/maps/api/place/photo";
 
 @end
