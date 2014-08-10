@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "wework_placeholder.png"
+      "filename" : "907-plus-rounded-square.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "907-plus-rounded-square@2x.png"
     }
   ],
   "info" : {

@@ -1,0 +1,15 @@
+//
+//  AALAddDetailViewController.h
+//  jmespace
+//
+//  Created by Albert Lardizabal on 8/10/14.
+//  Copyright (c) 2014 Albert Lardizabal. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface AALAddDetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (nonatomic) NSString *parseObjectID;
+
+@end

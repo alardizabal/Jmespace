@@ -31,6 +31,20 @@
 //    testObject[@"foo"] = @"bar";
 //    [testObject saveInBackground];
     
+//    PFObject *myPost = [PFObject objectWithClassName:@"Post"];
+//    myPost[@"title"] = @"I'm Hungry";
+//    myPost[@"content"] = @"Where should we go for lunch?";
+//    
+//    // Create the comment
+//    PFObject *myComment = [PFObject objectWithClassName:@"Comment"];
+//    myComment[@"content"] = @"Let's do Sushirrito.";
+//    
+//    // Add a relation between the Post and Comment
+//    myComment[@"parent"] = myPost;
+//    
+//    // This will save both myPost and myComment
+//    [myComment saveInBackground];
+    
     return YES;
 }
 							

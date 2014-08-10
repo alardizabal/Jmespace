@@ -30,6 +30,8 @@
     
     self.navigationController.navigationBar.topItem.title = @"";
     
+    self.navigationItem.titleView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"applogo"]];
+    
     NSURL *url = [[NSURL alloc]initWithString:self.spaceURL];
     
     UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64)];

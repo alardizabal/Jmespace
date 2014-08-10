@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oeM-8g-VBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1544" y="84"/>
+            <point key="canvasLocation" x="1540" y="-590"/>
         </scene>
         <!--Space Profile View Controller-->
         <scene sceneID="CbW-Fn-nEB">
@@ -65,6 +65,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lY6-Ou-y7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1127" y="84"/>
+        </scene>
+        <!--Add Detail View Controller-->
+        <scene sceneID="bqi-Zo-cmU">
+            <objects>
+                <viewController storyboardIdentifier="addDetailVC" id="MIu-es-heo" customClass="AALAddDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cfm-Bh-HiB"/>
+                        <viewControllerLayoutGuide type="bottom" id="s8H-If-HwW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tSg-q4-oyF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MpB-dH-7TQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1540" y="84"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Hv-fZ-bdR">

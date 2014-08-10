@@ -190,7 +190,7 @@
             
             GMSCameraPosition *updatedCamera = [GMSCameraPosition cameraWithLatitude:self.location2D.latitude
                                                                            longitude:self.location2D.longitude
-                                                                                zoom:17];
+                                                                                zoom:10];
             [_mapView setCamera:updatedCamera];
             
             [self.spaceTableView reloadData];
@@ -227,6 +227,12 @@
             tempSpaceObject.latitude = tempArray[i][@"geometry"][@"location"][@"lat"];
             tempSpaceObject.longitude = tempArray[i][@"geometry"][@"location"][@"lng"];
             tempSpaceObject.photoReference = tempArray[i][@"photos"][0][@"photo_reference"];
+            
+            CLLocationCoordinate2D position = CLLocationCoordinate2DMake([tempSpaceObject.latitude doubleValue], [tempSpaceObject.longitude doubleValue]);
+            GMSMarker *marker = [GMSMarker markerWithPosition:position];
+            marker.title = tempSpaceObject.name;
+            marker.map = self.mapView;
+            marker.appearAnimation = kGMSMarkerAnimationPop;
             
             [self.places addObject:tempSpaceObject];
             
