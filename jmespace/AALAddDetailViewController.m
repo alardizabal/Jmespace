@@ -35,25 +35,25 @@
     
     self.navigationItem.titleView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"applogo"]];
     
-    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePicture:)];
-    self.navigationItem.rightBarButtonItem = cameraButton;
+//    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePicture:)];
+//    self.navigationItem.rightBarButtonItem = cameraButton;
     
     UIButton *hideKeyboardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     [hideKeyboardButton addTarget:self action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];
     hideKeyboardButton.opaque = YES;
     [self.view addSubview:hideKeyboardButton];
     
-    UIView *bgComment = [[UIView alloc]initWithFrame:CGRectMake(10, 80, self.view.bounds.size.width - 20, 170)];
+    UIView *bgComment = [[UIView alloc]initWithFrame:CGRectMake(10, 10, self.view.bounds.size.width - 20, 150)];
     bgComment.layer.cornerRadius = 5;
     bgComment.layer.masksToBounds = YES;
     bgComment.backgroundColor = [UIColor darkGrayColor];
     [self.view addSubview:bgComment];
     
-    self.commentView = [[UITextView alloc]initWithFrame:CGRectMake(20, 90, self.view.bounds.size.width - 40, 100)];
+    self.commentView = [[UITextView alloc]initWithFrame:CGRectMake(20, 20, self.view.bounds.size.width - 40, 100)];
     self.commentView.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:self.commentView];
 
-    UIImageView *postCommentImage = [[UIImageView alloc]initWithFrame:CGRectMake(155, 210, (self.view.bounds.size.width - 40)/2, 40)];
+    UIImageView *postCommentImage = [[UIImageView alloc]initWithFrame:CGRectMake(155, 120, (self.view.bounds.size.width - 40)/2, 40)];
     postCommentImage.contentMode = UIViewContentModeScaleAspectFit;
     postCommentImage.image = [UIImage imageNamed:@"post_comment"];
     [self.view addSubview:postCommentImage];
@@ -61,14 +61,27 @@
     UIButton *postCommentButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [postCommentButton addTarget:self action:@selector(postCommentButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [postCommentButton setTitle:@"" forState:UIControlStateNormal];
-    postCommentButton.frame = CGRectMake(155, 210, (self.view.bounds.size.width - 40)/2, 40);
+    postCommentButton.frame = CGRectMake(155, 120, (self.view.bounds.size.width - 40)/2, 40);
     [self.view addSubview:postCommentButton];
     
     // Add image view for photo selection
     
-    self.picUploadImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 300, self.view.bounds.size.width - 20, 200)];
+    self.picUploadImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 300, self.view.bounds.size.width - 20, self.view.bounds.size.height/2)];
     self.picUploadImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:self.picUploadImageView];
+    
+    // Add toolbar at the bottom of the screen
+    
+    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44)];
+    
+    UIBarButtonItem *commentButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"comment"] style:UIBarButtonItemStylePlain target:self action:@selector(postComment:)];
+    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePicture:)];
+    UIBarButtonItem *photoLibButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add_photos"] style:UIBarButtonItemStylePlain target:self action:@selector(addPhotoFromLibrary:)];
+    
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    toolbar.items = [NSArray arrayWithObjects:commentButton, flexibleSpace, cameraButton, flexibleSpace, photoLibButton, nil];
+    [self.view addSubview:toolbar];
     
 }
 
@@ -86,6 +99,16 @@
     
     [self presentViewController:imagePicker animated:YES completion:nil];
 
+}
+
+- (IBAction)addPhotoFromLibrary:(id)sender
+{
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    
 }
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

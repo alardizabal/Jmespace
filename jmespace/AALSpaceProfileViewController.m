@@ -71,7 +71,7 @@
     NSString *unformattedSpaceString = self.spaceToDisplay.name;
     NSString *formattedSpaceString = [unformattedSpaceString stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
     
-    UILabel *spaceName = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, self.view.bounds.size.width - 20, self.view.bounds.size.height/2)];
+    UILabel *spaceName = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, self.view.bounds.size.width - 20, self.view.bounds.size.height/2)];
     spaceName.font = [UIFont boldSystemFontOfSize:48];
     spaceName.textColor = [UIColor whiteColor];
     spaceName.text = formattedSpaceString;
@@ -101,6 +101,8 @@
                 websiteButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
                 websiteButton.frame = CGRectMake(10, self.view.bounds.size.height - 200, 60, 25);
                 [self.view addSubview:websiteButton];
+                
+                
                 
                 [self showImageScroll];
                 

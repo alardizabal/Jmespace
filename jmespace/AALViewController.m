@@ -14,6 +14,7 @@
 #import "AALSpaceObject.h"
 #import "AALConstants.h"
 #import "MBProgressHUD.h"
+#import <Parse/Parse.h>
 
 
 @interface AALViewController ()
@@ -28,6 +29,7 @@
 @property (nonatomic) UITableView *spaceTableView;
 
 @property (nonatomic) NSMutableArray *places;
+@property (nonatomic) NSArray *parsePlaces;
 
 @property (nonatomic) GMSCameraPosition *camera;
 @property (nonatomic) GMSMapView *mapView;
@@ -53,42 +55,70 @@
     
     self.location = [[CLLocation alloc] init];
     
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 64, 320, 44)];
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+
+    // Setup - Map
     
-    // Setup - Table View
+    self.camera = [GMSCameraPosition cameraWithLatitude:40.705091
+                                              longitude:-74.013506
+                                                   zoom:15];
+    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 44, self.view.bounds.size.width, 200) camera:self.camera];
     
-    self.spaceTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height/2, self.view.bounds.size.width, self.view.bounds.size.height/2) style:UITableViewStylePlain];
+    self.mapView.myLocationEnabled = YES; // Notification to allow location services should pop up
+    
+    [self.view addSubview:self.mapView];
+    
+    // Setup - Table View (Heights: search bar = 44, map = 150
+    
+    self.spaceTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 244, self.view.bounds.size.width, self.view.bounds.size.height - 200 - 44 - 44 - 20) style:UITableViewStylePlain];
     [self.view addSubview:self.spaceTableView];
     
     self.spaceTableView.delegate = self;
     self.spaceTableView.dataSource = self;
     [self.spaceTableView setSeparatorInset:UIEdgeInsetsZero];   // Removes leading space at beginning of row in a table view
     
-    // Setup - Map
+    // Navigation Controller
     
-    self.camera = [GMSCameraPosition cameraWithLatitude:40.705091
-                                              longitude:-74.013506
-                                                   zoom:15];
-    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 108, self.view.bounds.size.width, self.view.bounds.size.height - self.spaceTableView.bounds.size.height - 108) camera:self.camera];
-    
-    // 108 is the height of the status, nav, and search bars.  284 is the height of the table view
-    
-    self.mapView.myLocationEnabled = YES; // Notification to allow location services should pop up
-    
-    [self.view addSubview:self.mapView];
-    
-    self.navigationController.navigationBar.tintColor = [UIColor darkGrayColor];
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = YES;
     
     [self.view addSubview:searchBar];
+    
+    [self getLocationButtonPressed:nil];
     
 }
 
 - (IBAction)getLocationButtonPressed:(UIBarButtonItem *)sender {
     
     [self.locationManager startUpdatingLocation];
+    
+//    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+//        if (!error) {
+//            
+//            NSLog(@"%@", geoPoint);
+//            PFGeoPoint *test = geoPoint;
+//            NSLog(@"%f", test.latitude);
+//            NSLog(@"%f", test.longitude);
+//            
+//            NSOperationQueue *parseQuery = [[NSOperationQueue alloc]init];
+//            
+//            [parseQuery addOperationWithBlock:^{
+//                PFQuery *query = [PFQuery queryWithClassName:@"Space"];
+//                // Interested in locations near user.
+//                [query whereKey:@"location" nearGeoPoint:test withinMiles:1];
+//                // Limit what could be a lot of points.
+//                query.limit = 10;
+//                // Final list of objects
+//                self.parsePlaces = [query findObjects];
+//                NSLog(@"Places %@", self.parsePlaces);
+//                
+//                NSLog(@"PlaceID %@", self.parsePlaces[0][@"PlaceId"]);
+//                NSLog(@"Name %@", self.parsePlaces[0][@"name"]);
+//                
+//            }];
+//        }
+//    }];
     
 }
 
@@ -134,6 +164,7 @@
     
     AALSpaceObject *tempObject = [[AALSpaceObject alloc]init];
     tempObject = self.places[indexPath.row];
+    //tempObject = self.parsePlaces[indexPath.row];
     
     AALSpaceCustomCellTableViewCell *cell = (AALSpaceCustomCellTableViewCell *)[self.spaceTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
@@ -190,7 +221,7 @@
             
             GMSCameraPosition *updatedCamera = [GMSCameraPosition cameraWithLatitude:self.location2D.latitude
                                                                            longitude:self.location2D.longitude
-                                                                                zoom:10];
+                                                                                zoom:12];
             [_mapView setCamera:updatedCamera];
             
             [self.spaceTableView reloadData];
